@@ -624,11 +624,6 @@ export class FilterByPipe implements PipeTransform {
 }
 ```
 
-#NextStep
-    cd ..
-    git checkout step10
-```
-
 Finally some final styling.
 
 ```css
@@ -661,6 +656,6 @@ md-radio-button {
 
 *Voilá!*
 
-#Next step
+#NextStep
     cd ..
-    git checkout step8
+    git checkout step10
