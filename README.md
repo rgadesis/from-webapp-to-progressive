@@ -1,165 +1,133 @@
 #Previously
-In the previous step we set up our layout.
+In the previous step we created our first and main route alongside with the component that will be displayed with it.
 
-#Routing
-We are going to create the routes of our application.
+#Setting up our ListComponent
+Now we are going to set up our main component. 
+This component is going to list our TODOs.
+We like clean code and good practices so first of all let's begin by creating a Todo interface.
 
-This will be done in the near future by typing `git generate route my-route`. But due to changes in the Angular 2 router 
-it is temporarily disabled.
+    cd webapp
+    ng generate interface todo
 
-So we are going to create our routes following the current specification described in the [docs](https://angular.io/docs/ts/latest/guide/router.html).
+Since angular-cli does not support relative interfaces yet, let's move our new created interface inside our `src/app/list` folder.
 
-First of all we are going to create the component that our route is going to display.
-
-    ng generate component list
-
-Once the new `ListComponent` is created we are going to create new file with the routes of our Web App. Let's create a new 
-`app.routes.ts` under the `app/` folder with the following content.
+Now we can specify our interface. Our `src/app/list/todo.ts` file shoul be like this
 
 ```javascript
-import { provideRouter, RouterConfig } from '@angular/router';
-import { ListComponent } from './list';
-
-export const routes: RouterConfig = [
-  { path: 'list', component: ListComponent }
-];
-
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
-];
-```
-
-Next we need to register oir router providers in the `bootstrap` method (inside `main.ts`).
-
-But first we are going to include our router in `app/index.ts` so we can import our `APP_ROUTER_PROVIDERS` in `main.ts` 
-following the best practices.
-
-```javascript
-export * from './environment';
-export * from './app.component';
-export * from './app.routes';
-```
-
-Now we can register por `APP_ROUTER_PROVIDERS` in `main.ts`.
-
-```javascript
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { enableProdMode } from '@angular/core';
-import { AppComponent, APP_ROUTER_PROVIDERS, environment } from './app/';
-
-if (environment.production) {
-  enableProdMode();
+export interface Todo {
+    title?: string;
+    description?: string;
+    completed?: boolean;
 }
-
-bootstrap(AppComponent, [
-  APP_ROUTER_PROVIDERS
-]);
-
 ```
 
-Next we are going to place the [*Router Outlet*](https://angular.io/docs/ts/latest/guide/router.html#!#router-outlet) in `app.component.html`.
-
-```html
-<md-toolbar color="primary">{{title}}</md-toolbar>
-<router-outlet></router-outlet>
-```
-
-Our new route has been created and our Web App is ready to navigate to it.
-
-Let's import the router directives needed into `AppComponent` so we can add 
-a navigation link to our brand new route `/list`.
+Now lets create a new file called `src/app/list/defaults.ts` where we are going to set up any default values for our `ListComponent`.
 
 ```javascript
-import { Component } from '@angular/core';
-import { MdToolbar } from '@angular2-material/toolbar';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Todo } from './todo';
+
+export const todos: Todo[] = [
+    {
+        title: 'My first todo',
+        description: 'This is placeholder TODO.',
+        completed: false
+    }, 
+    {
+        title: 'Develop AppComponent',
+        description: 'Complete the development of the layout of our Web App',
+        completed: true
+    }
+];
+```
+
+Let's import the interface and our default `todos` and create a `todos` property in our `ListComponent`.
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { Todo } from './todo';
+import { todos } from './defaults';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives: [
-    ROUTER_DIRECTIVES,
-    MdToolbar
-  ]
+  selector: 'app-list',
+  templateUrl: 'list.component.html',
+  styleUrls: ['list.component.css']
 })
-export class AppComponent {
-  title = 'TODO List';
+export class ListComponent implements OnInit {
+  todos: Todo[] = todos;
+  constructor() {}
+
+  ngOnInit() {}
+
 }
 ```
 
-Now we can use the `RouterLink` directive in our `app.component.html`.
+And let's finish by adding the `md-card` material2 component to display our tasks.
 
-```html
-<md-toolbar color="primary">
-    <a [routerLink]="['/list']">{{title}}</a>
-</md-toolbar>
-<router-outlet></router-outlet>
-```
-
-If we try this new link we can see that it is working!
-
-But it is pretty ugly so let's replace the anchor with a `md-button`. First we are going to import 
-the directive from material2 and create a metho to `AppComponent` that let us navigate to `/list` from the button.
+##Import MD_CARD_DIRECTIVES
+Import and include `MD_CARD_DIRECTIVES` in our `ListComponent`.
 
 ```javascript
-import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
-import { MdToolbar } from '@angular2-material/toolbar';
-import { MdButton } from '@angular2-material/button';
+import { Component, OnInit } from '@angular/core';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { Todo } from './todo';
+import { todos } from './defaults';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  selector: 'app-list',
+  templateUrl: 'list.component.html',
+  styleUrls: ['list.component.css'],
   directives: [
-    ROUTER_DIRECTIVES,
-    MdToolbar,
-    MdButton
+    MD_CARD_DIRECTIVES
   ]
 })
-export class AppComponent {
-  title = 'TODO List';
-  constructor(
-    private router: Router
-  ) {}
-  gotToList() {
-    this.router.navigate(['/list']);
-  }
-}
+export class ListComponent implements OnInit {
+  todos: Todo[] = todos;
+  constructor() {}
 
+  ngOnInit() {}
+
+}
 ```
 
-And finally change our `app.component.html` to use `md-button` instead of an anchor.
+##Add md-card component to our template
+Iterate over our `todos` to display a card for every task.
 
 ```html
-<md-toolbar color="primary">
-    <button md-button (click)="goToList()">{{title}}</button>
-</md-toolbar>
-<router-outlet></router-outlet>
+<div class="card-container">
+  <md-card *ngFor="let todo of todos" [ngClass]="{completed: todo.completed}">
+    <img md-card-image [alt]="todo.title" src="http://lorempixel.com/g/400/150/abstract/">
+    <md-card-title>{{todo.title}}</md-card-title>
+    <md-card-content class="secondary">{{todo.description}}</md-card-content>
+  </md-card>
+</div>
 ```
 
-If we try our application at this point we will see an error telling us that there are not
-any route matching `''` path. So let's create a new route that redirects our Web App to our main view.
+We can now see how our `todos` are showing properly in our Web App but let's make it prettier.
 
-Add to `app.routes.ts` the new route.
+##Add some styles
+Copy & paste these styles in `list.component.css`.
 
-```javascript
-import { provideRouter, RouterConfig } from '@angular/router';
-import { ListComponent } from './list';
+```css
+.completed {
+    opacity: 0.5;
+}
 
-export const routes: RouterConfig = [
-  { path: '' , redirectTo: '/list'},
-  { path: 'list', component: ListComponent }
-];
+.secondary {
+    color: rgba(0, 0, 0, 0.54);
+}
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
-];
+md-card {
+    width: 400px;
+    box-sizing: boder-box;
+    margin: 16px;
+}
+
+.card-container {
+    display: flex;
+    flex-flow: row wrap;
+}
 ```
 
-#Next step
-    cd ..
-    git checkout step6
+*Vouilá!*
