@@ -1,4 +1,4 @@
-#My first Progressive Web App
+#From Web App to Progressive Web App
 
 This project will guide you step by step during the development of an Angular 2 
 web application. We will also include the changes needed in order to make our web 
