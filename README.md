@@ -8,8 +8,3 @@ We will now create our application.
 
 Keep in mind that **webapp** can be any given name. We are using **webapp**
 for the purpose of this demo.
-
-#Serving our application
-
-    cd webapp
-    ng serve
