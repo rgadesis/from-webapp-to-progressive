@@ -1,1 +1,4 @@
-<md-toolbar color="primary">{{title}}</md-toolbar>
+<md-toolbar color="primary">
+    <button md-button (click)="goToList()">{{title}}</button>
+</md-toolbar>
+<router-outlet></router-outlet>
