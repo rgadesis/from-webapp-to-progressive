@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 import { MdToolbar } from '@angular2-material/toolbar';
-import { MdButton } from '@angular2-material/button';
+import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
+import { View, views } from './app.routes';
 
 @Component({
   moduleId: module.id,
@@ -10,16 +14,17 @@ import { MdButton } from '@angular2-material/button';
   styleUrls: ['app.component.css'],
   directives: [
     ROUTER_DIRECTIVES,
+    MD_SIDENAV_DIRECTIVES,
+    MD_LIST_DIRECTIVES,
+    MdIcon,
     MdToolbar,
-    MdButton
+    MD_BUTTON_DIRECTIVES
+  ],
+  providers: [
+    MdIconRegistry
   ]
 })
 export class AppComponent {
-  title = 'TODO List';
-  constructor(
-    private router: Router
-  ) {}
-  goToList() {
-    this.router.navigate(['/list']);
-  }
+  title:string = 'TODO List';
+  views:View[] = views;
 }

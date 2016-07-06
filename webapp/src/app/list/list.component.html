@@ -6,7 +6,7 @@
   </md-radio-group>
 </md-card>
 <div class="card-container">
-  <md-card *ngFor="let todo of (todos | filterBy: 'completed': completed.value)" [ngClass]="{completed: todo.completed}">
+  <md-card *ngFor="let todo of (todos.get() | filterBy: 'completed': completed.value)" [ngClass]="{completed: todo.completed}">
     <img md-card-image [alt]="todo.title" src="http://lorempixel.com/g/400/150/abstract/">
     <md-card-title>{{todo.title}}</md-card-title>
     <md-card-content class="secondary">{{todo.description}}</md-card-content>

@@ -1,0 +1,17 @@
+<div class="form">
+  <md-card>
+    <md-card-title>What else would you like to do today?</md-card-title>
+    <md-card-content>
+      <form>
+        <md-input placeholder="Title" #title></md-input>
+        <md-input placeholder="Description" #description></md-input>
+        <div>
+          <md-checkbox indeterminate="true" #completed>Completed</md-checkbox>
+        </div>
+      </form>
+    </md-card-content>
+    <md-card-actions align="end">
+      <button md-raised-button color="accent" (click)="add({title: title.value, description: description.value, completed: completed.checked}); title.value = undefined; description.value = undefined; completed.checked = false;">ADD</button>
+    </md-card-actions>
+  </md-card>
+</div>

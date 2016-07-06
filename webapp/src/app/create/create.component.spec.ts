@@ -10,12 +10,12 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { ListComponent } from './list.component';
+import { CreateComponent } from './create.component';
 import { TodosService } from '../shared/todos.service';
 
-describe('Component: List', () => {
+describe('Component: Create', () => {
   it('should create an instance', () => {
-    let component = new ListComponent(new TodosService());
+    let component = new CreateComponent(new TodosService());
     expect(component).toBeTruthy();
   });
 });

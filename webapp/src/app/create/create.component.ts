@@ -1,38 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_RADIO_DIRECTIVES, MdUniqueSelectionDispatcher } from '@angular2-material/radio';
-import { FilterByPipe } from '../filter-by.pipe';
+import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
+import { MD_CHECKBOX_DIRECTIVES } from '@angular2-material/checkbox'
 import { TodosService } from '../shared/todos.service';
 import { Todo } from '../shared/todo';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-list',
-  templateUrl: 'list.component.html',
-  styleUrls: ['list.component.css'],
+  selector: 'app-create',
+  templateUrl: 'create.component.html',
+  styleUrls: ['create.component.css'],
   directives: [
     MD_CARD_DIRECTIVES,
     MD_BUTTON_DIRECTIVES,
-    MD_RADIO_DIRECTIVES
-  ],
-  pipes: [
-    FilterByPipe
+    MD_INPUT_DIRECTIVES,
+    MD_CHECKBOX_DIRECTIVES
   ],
   providers: [
-    MdUniqueSelectionDispatcher,
     TodosService
   ]
 })
-export class ListComponent implements OnInit {
+export class CreateComponent implements OnInit {
+  todo: Todo = {
+    title: '',
+    description: '',
+    completed: false
+  };
   constructor(
     private todos: TodosService
   ) {}
-  complete(todo: Todo) {
-    this.todos.complete(todo);
-  }
-  remove(todo: Todo) {
-    this.todos.remove(todo);
+  add(todo: Todo) {
+    this.todos.add(todo);
   }
   ngOnInit() {}
 
