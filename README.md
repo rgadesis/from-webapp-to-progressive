@@ -159,3 +159,7 @@ export const APP_ROUTER_PROVIDERS = [
   provideRouter(routes)
 ];
 ```
+
+#Next step
+    cd ..
+    git checkout step6
