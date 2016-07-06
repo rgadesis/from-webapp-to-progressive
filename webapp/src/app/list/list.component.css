@@ -7,12 +7,19 @@
 }
 
 md-card {
+    margin: 16px;
+}
+
+.card-container md-card {
     width: 400px;
     box-sizing: boder-box;
-    margin: 16px;
 }
 
 .card-container {
     display: flex;
     flex-flow: row wrap;
+}
+
+md-radio-button {
+    margin: 16px 8px;
 }
