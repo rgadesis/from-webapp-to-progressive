@@ -126,5 +126,6 @@ And add an `md-button` to `src/app/app.component.html`.
 
 #Next step
 Navigate to the root of this project and then go to the next step
+
     cd ..
     git checkout step4
