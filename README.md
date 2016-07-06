@@ -130,4 +130,4 @@ md-card {
 }
 ```
 
-*Vouilá!*
+*Voilá!*
