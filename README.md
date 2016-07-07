@@ -133,5 +133,5 @@ md-card {
 *Voilá!*
 
 ##Next step
-
+    cd ..
     git checkout step7
