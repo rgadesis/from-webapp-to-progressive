@@ -5,13 +5,13 @@ In the previous step we could see our application running.
 We are going to use [material2](https://material.angular.io/) for our project.
 So we are going to follow [this steps](https://github.com/angular/angular-cli/wiki/3rd-party-libs#adding-material2-to-your-project) in order to achieve so.
 
-##0 - Navigate to the project folder
+##Navigate to the project folder
     cd webapp
 
-##1 - Install material2 core
+##Install material2 core
     npm i @angular2-material/core --save
 
-##2 - Install material2 packages
+##Install material2 packages
     npm i @angular2-material/<%= package %> --save
 
 Current available packages are:
@@ -35,7 +35,7 @@ so you can *copy&paste* in your terminal the following snippet.
 
 You might find some peer dependency errors and warnings. We are going to ignore them for now.
 
-##3 - Include material2 into angular-cli-build.js
+##Include material2 into angular-cli-build.js
 We are going to include our material2 dependencies in  `angular-cli-build.js` to let the 
 browser compiler know about them.
 
@@ -59,7 +59,7 @@ module.exports = function(defaults) {
 };
 ```
 
-##4 - Set up the SystemJS configuration
+##Set up the SystemJS configuration
 Now we are going to modify our `src/system-config.ts` to add the new packages.
 
 ```javascript
@@ -94,7 +94,7 @@ materialPkgs.forEach((pkg) => {
 });
 ```
 
-##5 - Example of use
+##Example of use
 Lets add a sample `md-button` to check if everything is OK.
 
 We are going to import the button in our main `src/app/app.component.ts`.
@@ -119,7 +119,7 @@ And add an `md-button` to `src/app/app.component.html`.
 <button md-raised-button>{{title}}</button>
 ```
 
-##6 - Serve de application
+##Serve de application
     ng serve
 
 *Voilá!*
