@@ -146,6 +146,8 @@ First of all we are going to enable ServiceWorkers in our browser.
 
 Once they are enabled we can build our Progressive Application by adding `--prod` flag to `ng serve` or `ng build` commands.
 
+**--prod currently is not working as intended but we can see a working example [here](https://berry-app.appspot.com/#/snaps/list)**
+
 We can open the dev tools and check under `resources` tab, in `Service Workers` section (with `Show all` option checked) and
 check the Service Workers currently running.
 
