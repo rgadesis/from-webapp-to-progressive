@@ -131,3 +131,7 @@ md-card {
 ```
 
 *Voilá!*
+
+##Next step
+
+    git checkout step7
