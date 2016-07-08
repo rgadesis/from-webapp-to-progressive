@@ -5,7 +5,7 @@ web application. We will also include the changes needed in order to make our we
 application progressive.
 
 ##Note
-This project is a work in progress.
+This project is a work in progress, it is not stable and needs to be completed.
 Some tools and dependencies are now in pre-release state.
 
 #Prerequisites
